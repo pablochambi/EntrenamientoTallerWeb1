@@ -36,7 +36,7 @@ public class CalculadoraController {
         model.put("operaciones", OPERACIONES);
 
         repoblarSiSonValoresNoNulos(model,num1, num2, operacion);
-        agregarErrorSiNoEsNulo(model, "error", error);
+        agregarSiNoNulo(model, "error", error);
 
         return new ModelAndView("calculadora", model);
     }
@@ -111,39 +111,5 @@ public class CalculadoraController {
             model.put(clave, valor);
         }
     }
-    private void agregarErrorSiNoEsNulo(ModelMap model, String clave, String valor) {
-        if (valor != null) {
-            model.put(clave, valor);
-        }
-    }
-
-
-//    @GetMapping("/resultado")
-//    public ModelAndView calcular(
-//            @RequestParam Double num1,
-//            @RequestParam Double num2,
-//            @RequestParam String operacion,
-//            RedirectAttributes redirectAttributes) {
-//
-//        try {
-//            Double resultado = servicioCalculadora.calcular(num1, num2, operacion);
-//            ModelMap model = new ModelMap();
-//            model.put("num1", num1);
-//            model.put("num2", num2);
-//            model.put("operacion", operacion);
-//            model.put("resultado", resultado);
-//            return new ModelAndView("vista_resultado", model);
-//
-//        } catch (CampoNuloException | DivisionPorCeroException e){
-//            redirectAttributes.addFlashAttribute("error", e.getMessage());
-//            redirectAttributes.addAttribute("num1", num1);
-//            redirectAttributes.addAttribute("num2", num2);
-//            redirectAttributes.addAttribute("operacion", operacion);
-//            return new ModelAndView("redirect:/calculadora");
-//        }
-//
-//    }
-
-
 }
 
