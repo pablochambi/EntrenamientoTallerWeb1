@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora</title>
+
+    <!-- Boostrap core css -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+         .input_grande {
+             width: 70px;
+             height: 30px;
+             font-size: 18px;
+         }
+
+         .display_flex_colum{
+             display: flex;
+             flex-direction: column;
+         }
+
+        .unoDebajoDeOtro{
+            white-space: pre-line;
+        }
+
+    </style>
+</head>
+<body>
+
+<form class="display_flex_colum" th:action="@{/resultado}" method="GET">
+
+    <div>
+        <label for="num1">Numero 1:</label>
+        <input class="input_grande" type="number" th:value="${num1}" id="num1" name="num1" required/>
+    </div>
+
+    <div>
+        <label for="num2">Numero 2:</label>
+        <input class="input_grande" type="number" th:value="${num2}" id="num2" name="num2" required/>
+    </div>
+
+<div>
+    <select id="operacion" name="operacion" class="form-select" required>
+
+        <option value="">-- Seleccione operación --</option>
+
+        <option th:each="op : ${operaciones}"
+                th:value="${op}"
+                th:text="${#strings.capitalize(op)}"
+                th:selected="${op == operacion}"  >
+        </option>
+    </select>
+
+    <button>Calcular</button>
+
+    <p th:if="${error != null and (error != '')}" class="alert alert-danger unoDebajoDeOtro" th:text="${error}">
+
+</div>
+
+
+</form>
+
+</body>
+</html>

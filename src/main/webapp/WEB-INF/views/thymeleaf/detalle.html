@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Detalle del Producto</title>
+
+  <!-- Boostrap core css -->
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+
+  <!-- custom style -->
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1>Detalle del Producto</h1>
+
+      <div th:if="${producto != null}">
+        <p><strong>Nombre:</strong> <span th:text="${producto.nombre}">Nombre del producto</span></p>
+        <p><strong>Descripción:</strong> <span th:text="${producto.descripcion}">Descripción del producto</span></p>
+        <p><strong>Precio:</strong> $<span th:text="${producto.precio}">0.0</span></p>
+        <p><strong>Id:</strong> <span th:text="${producto.id}">ID</span></p>
+      </div>
+
+      <div th:if="${producto == null}">
+        <p>Producto no encontrado.</p>
+      </div>
+
+      <a th:href="@{/productos}">Volver a la lista de productos</a>
+
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+</html>

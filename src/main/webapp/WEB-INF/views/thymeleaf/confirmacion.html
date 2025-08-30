@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmación</title>
+</head>
+<body>
+
+<h1>¡Gracias, <span th:text="${contacto.nombre}">Nombre</span>!</h1>
+
+<p>Hemos recibido tu mensaje: <span th:text="${contacto.mensaje}">Mensaje</span></p>
+
+<p>Te contactaremos pronto a tu email: <span th:text="${contacto.email}">Email</span></p>
+
+</body>
+</html>
