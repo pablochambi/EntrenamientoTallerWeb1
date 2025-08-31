@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class TareaControllerTest_Jules {
+public class TareaControllerTest {
 
     private TareaController tareaController;
     private TareaService tareaService;

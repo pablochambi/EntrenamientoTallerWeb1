@@ -156,7 +156,6 @@
                     <!-- Configuración específica para las pruebas -->
                     <includes>
                         <include>**/*Test.java</include>
-                        <include>**/*Test_Jules.java</include>
                     </includes>
                 </configuration>
             </plugin>

@@ -4,11 +4,13 @@ import com.tallerwebi.dominio.Implementaciones.TareaServiceImpl;
 import com.tallerwebi.dominio.entidades.Proyecto;
 import com.tallerwebi.dominio.entidades.Tarea;
 import com.tallerwebi.dominio.interfaces.RepositorioProyecto;
+import com.tallerwebi.dominio.interfaces.RepositorioTarea;
 import com.tallerwebi.dominio.interfaces.TareaService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -24,10 +26,13 @@ public class TereaServiceTest {
     private TareaService tareaService;
     private RepositorioProyecto repositorioProyecto;
 
+    private RepositorioTarea repositorioTarea;
+
     @BeforeEach
     public void setUp() {
         repositorioProyecto = mock(RepositorioProyecto.class);
-        tareaService = new TareaServiceImpl(repositorioProyecto);
+        repositorioTarea = mock(RepositorioTarea.class);
+        tareaService = new TareaServiceImpl(repositorioProyecto, repositorioTarea);
         when(repositorioProyecto.buscarPorId(1L)).thenReturn(new Proyecto(1L, "Proyecto 1"));
     }
 
@@ -40,8 +45,16 @@ public class TereaServiceTest {
 
     @Test
     public void queSePuedaObtenerLasDosTareasAgregadas() {
-        givenHay2TareasAgregadasALaBaseDeDatos();
+        // Preparación
+        List<Tarea> tareas = new ArrayList<>();
+        tareas.add(new Tarea(1L, "Tarea 1", false));
+        tareas.add(new Tarea(2L, "Tarea 2", true));
+        when(repositorioTarea.buscarTodas()).thenReturn(tareas);
+
+        // Ejecución
         List<Tarea> result = whenSeObtienenTodasLasTareas();
+
+        // Verificación
         thenSeObtienenLasTareas(result);
     }
 
@@ -70,7 +83,7 @@ public class TereaServiceTest {
     public void testMarcarComoCompletada() {
         // Prueba: Marcar una tarea existente como completada
         Tarea tarea = new Tarea(1L, "Tarea 1", false);
-        tareaService.agregar(1L, tarea);
+        when(repositorioTarea.buscarPorId(1L)).thenReturn(tarea);
         Tarea tarea2 = whenMarcarUnaTareaComoCompletada(1L);
         thenSeMarcoCorrectamenteComoCompletada(tarea2);
     }
@@ -91,12 +104,6 @@ public class TereaServiceTest {
         assertNull(tarea);
     }
 
-    private void givenHay2TareasAgregadasALaBaseDeDatos() {
-        Tarea tarea1 = new Tarea(1L, "Tarea 1", false);
-        Tarea tarea2 = new Tarea(2L, "Tarea 2", true);
-        tareaService.agregar(1L, tarea1);
-        tareaService.agregar(1L, tarea2);
-    }
 
     private void thenSeObtienenLasTareas(List<Tarea> result) {
         assertEquals(2, result.size(), "Debería haber 2 tareas");
