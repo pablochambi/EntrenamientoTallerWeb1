@@ -1,9 +1,18 @@
 package com.tallerwebi.dominio.entidades;
 
+import javax.persistence.*;
+
+@Entity
 public class Tarea {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
     private boolean completada;
+
+    @ManyToOne
+    @JoinColumn(name = "proyecto_id")
+    private Proyecto proyecto;
 
     public Tarea() {}
 
@@ -20,4 +29,12 @@ public class Tarea {
     public void setNombre(String nombre) { this.nombre = nombre; }
     public boolean isCompletada() { return completada; }
     public void setCompletada(boolean completada) { this.completada = completada; }
+
+    public Proyecto getProyecto() {
+        return proyecto;
+    }
+
+    public void setProyecto(Proyecto proyecto) {
+        this.proyecto = proyecto;
+    }
 }

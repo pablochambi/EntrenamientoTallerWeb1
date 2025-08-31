@@ -32,8 +32,8 @@ public class Estudiante {
     private String email;
 
     // Reemplaza @ManyToMany por esto:
-//    @OneToMany(mappedBy = "estudiante")
-//    private List<Inscripcion> inscripciones = new ArrayList<>();
+    @OneToMany(mappedBy = "estudiante")
+    private List<Inscripcion> inscripciones = new ArrayList<>();
 
     public Estudiante() {
     }
