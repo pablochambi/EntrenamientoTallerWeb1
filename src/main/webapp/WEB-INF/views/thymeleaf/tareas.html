@@ -32,8 +32,10 @@
         </td>
     </tr>
 </table>
-<form th:action="@{/proyectos/{proyectoId}/tareas}" method="post">
-    <input type="text" name="nombre" placeholder="Nombre de la tarea" required/>
+<form th:action="@{/proyectos/{id}/tareas(id=${proyectoId})}" method="post">
+    <label>
+        <input type="text" name="nombre" placeholder="Nombre de la tarea" required/>
+    </label>
     <input type="submit" value="Agregar tarea"/>
 </form>
 </body>
