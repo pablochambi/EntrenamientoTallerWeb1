@@ -73,4 +73,13 @@ public class TareaServiceImpl implements TareaService {
     public void actualizar(Tarea tarea) {
         repositorioTarea.guardar(tarea);
     }
+
+    @Override
+    public String obtenerNombreProyecto(Long proyectoId) {
+        Proyecto proyecto = repositorioProyecto.buscarPorId(proyectoId);
+        if(proyecto != null){
+            return proyecto.getNombre();
+        }
+        return "Proyecto no encontrado";
+    }
 }
