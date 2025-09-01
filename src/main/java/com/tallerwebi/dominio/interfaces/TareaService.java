@@ -19,4 +19,6 @@ public interface TareaService {
     Long eliminar(Long id);
 
     void actualizar(Tarea tarea);
+
+    String obtenerNombreProyecto(Long proyectoId);
 }
