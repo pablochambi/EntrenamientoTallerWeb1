@@ -11,7 +11,7 @@
         <li th:each="tarea : ${proyecto.tareas}" th:text="${tarea.nombre}"></li>
     </ul>
     <h3>Agregar Tarea</h3>
-    <form th:action="@{/proyectos/{id}/tareas(id=${proyecto.id})}" method="post">
+    <form th:action="@{/proyectos/{id}/agregartarea(id=${proyecto.id})}" method="post">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre">
         <button type="submit">Agregar</button>
