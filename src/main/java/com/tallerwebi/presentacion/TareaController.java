@@ -39,7 +39,6 @@ public class TareaController {
         return new ModelAndView("redirect:/proyectos/" + proyectoId + "/mostrartareas");
     }
 
-
     @PostMapping("/tareas/{id}/completar")
     public ModelAndView marcarComoCompletada(@PathVariable("id") Long id) {
         Tarea tarea = tareaService.marcarComoCompletada(id);
