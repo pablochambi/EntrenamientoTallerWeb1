@@ -102,14 +102,17 @@ public class CalculadoraController {
         redirectAttributes.addAttribute("operacion", operacion);
     }
 
-
-
-
-
     private void agregarSiNoNulo(ModelMap model, String clave, Object valor) {
+
+        if(valor.toString().isBlank()){
+            model.put(clave, null);
+        }
+
         if (valor != null) {
             model.put(clave, valor);
         }
+
     }
+
 }
 

@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Nuevo Proyecto</h1>
-    <form action="/proyectos" method="post">
+    <form th:action="@{/proyectos}" method="post">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre">
         <button type="submit">Crear</button>

@@ -25,6 +25,8 @@ public class TareaController {
     public ModelAndView mostrarTareasPorProyecto(@PathVariable("proyectoId") Long proyectoId) {
         ModelMap model = new ModelMap();
         model.put("tareas", tareaService.obtenerPorProyecto(proyectoId));
+        model.put("proyectoId", proyectoId);
+        model.put("nombreProyecto", tareaService.obtenerNombreProyecto(proyectoId));
         return new ModelAndView("tareas", model);
     }
 

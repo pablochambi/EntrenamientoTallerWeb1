@@ -6,11 +6,22 @@
 </head>
 <body>
     <h1>Proyectos</h1>
-    <ul>
-        <li th:each="proyecto : ${proyectos}">
-            <a th:href="@{/proyectos/{id}(id=${proyecto.id})}" th:text="${proyecto.nombre}"></a>
-        </li>
-    </ul>
-    <a href="/proyectos/nuevo">Nuevo Proyecto</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="proyecto : ${proyectos}">
+                <td th:text="${proyecto.id}"></td>
+                <td>
+                    <a th:href="@{/proyectos/{id}(id=${proyecto.id})}" th:text="${proyecto.nombre}"></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/proyectos/nuevo}">Nuevo Proyecto</a>
 </body>
 </html>

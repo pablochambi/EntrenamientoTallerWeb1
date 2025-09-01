@@ -15,7 +15,7 @@
     </style>
 </head>
 <body>
-<h1>Agenda de Tareas</h1>
+<h1>Agenda de Tareas de <span th:text="${nombreProyecto}" ></span></h1>
 <table>
     <tr>
         <th>Nombre</th>
@@ -32,7 +32,7 @@
         </td>
     </tr>
 </table>
-<form th:action="@{/tareas}" method="post">
+<form th:action="@{/proyectos/{proyectoId}/tareas}" method="post">
     <input type="text" name="nombre" placeholder="Nombre de la tarea" required/>
     <input type="submit" value="Agregar tarea"/>
 </form>
