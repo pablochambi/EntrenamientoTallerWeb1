@@ -21,7 +21,7 @@ public class TareaController {
         this.tareaService = tareaService;
     }
 
-    @PostMapping("/proyectos/{proyectoId}/tareas")
+    @GetMapping("/proyectos/{proyectoId}/tareas")
     public ModelAndView mostrarTareasPorProyecto(@PathVariable("proyectoId") Long proyectoId) {
         ModelMap model = new ModelMap();
         model.put("tareas", tareaService.obtenerPorProyecto(proyectoId));
@@ -30,7 +30,7 @@ public class TareaController {
         return new ModelAndView("tareas", model);
     }
 
-    @GetMapping("/proyectos/{proyectoId}/tareas")
+    @PostMapping("/proyectos/{proyectoId}/tareas")
     public ModelAndView agregarTarea(@PathVariable("proyectoId") Long proyectoId, @RequestParam String nombre) {
         Tarea tarea = new Tarea();
         tarea.setNombre(nombre);
