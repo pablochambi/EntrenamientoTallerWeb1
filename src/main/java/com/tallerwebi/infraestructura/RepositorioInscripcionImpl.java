@@ -38,26 +38,26 @@ public class RepositorioInscripcionImpl implements RepositorioInscripcion {
         sessionFactory.getCurrentSession().save(inscripcion);
     }
 
-    @Override
-    public Set<Estudiante> obtenerEstudiantesPorCurso(Long cursoId) {
-        return new HashSet<>(sessionFactory.getCurrentSession()
-                .createCriteria(Inscripcion.class, "i")
-                .createAlias("i.estudiante", "e")
-                .createAlias("i.curso", "c")
-                .add(Restrictions.eq("c.id", cursoId))
-                .setProjection(Projections.property("e")) //Equivalente: `SELECT e.*`
-                .list());
-    }
-    
 //    @Override
 //    public Set<Estudiante> obtenerEstudiantesPorCurso(Long cursoId) {
 //        return new HashSet<>(sessionFactory.getCurrentSession()
-//                .createCriteria(Estudiante.class, "e")
-//                .createAlias("e.inscripciones", "i")
+//                .createCriteria(Inscripcion.class, "i")
+//                .createAlias("i.estudiante", "e")
 //                .createAlias("i.curso", "c")
 //                .add(Restrictions.eq("c.id", cursoId))
+//                .setProjection(Projections.property("e")) //Equivalente: `SELECT e.*`
 //                .list());
 //    }
+
+    @Override
+    public Set<Estudiante> obtenerEstudiantesPorCurso(Long cursoId) {
+        return new HashSet<>(sessionFactory.getCurrentSession()
+                .createCriteria(Estudiante.class, "e")
+                .createAlias("e.inscripciones", "i")
+                .createAlias("i.curso", "c")
+                .add(Restrictions.eq("c.id", cursoId))
+                .list());
+    }
 
     @Override
     public boolean buscarPorId(Long id) {

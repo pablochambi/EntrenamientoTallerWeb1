@@ -21,25 +21,48 @@ public class TareaController {
         this.tareaService = tareaService;
     }
 
-    @GetMapping("/tareas")
-    public ModelAndView mostrarTareas() {
+    @GetMapping("/proyectos/{proyectoId}/tareas")
+    public ModelAndView mostrarTareasPorProyecto(@PathVariable("proyectoId") Long proyectoId) {
         ModelMap model = new ModelMap();
-        model.put("tareas", tareaService.obtenerTodas());
+        model.put("tareas", tareaService.obtenerPorProyecto(proyectoId));
         return new ModelAndView("tareas", model);
     }
 
-    @PostMapping("/tareas")
-    public ModelAndView agregarTarea(@RequestParam String nombre) {
+    @PostMapping("/proyectos/{proyectoId}/tareas")
+    public ModelAndView agregarTarea(@PathVariable("proyectoId") Long proyectoId, @RequestParam String nombre) {
         Tarea tarea = new Tarea();
         tarea.setNombre(nombre);
         tarea.setCompletada(false);
-        tareaService.agregar(tarea);
-        return new ModelAndView("redirect:/tareas");
+        tareaService.agregar(proyectoId, tarea);
+        return new ModelAndView("redirect:/proyectos/" + proyectoId + "/tareas");
     }
 
     @PostMapping("/tareas/{id}/completar")
     public ModelAndView marcarComoCompletada(@PathVariable("id") Long id) {
-        tareaService.marcarComoCompletada(id);
-        return new ModelAndView("redirect:/tareas");
+        Tarea tarea = tareaService.marcarComoCompletada(id);
+        return new ModelAndView("redirect:/proyectos/" + tarea.getProyecto().getId() + "/tareas");
+    }
+
+    @GetMapping("/tareas/{id}")
+    public ModelAndView obtenerTareaPorId(@PathVariable("id") Long id) {
+        ModelMap model = new ModelMap();
+        Tarea tarea = tareaService.obtenerPorId(id);
+        model.put("tarea", tarea);
+        return new ModelAndView("detalle-tarea", model);
+    }
+
+    @PostMapping("/tareas/{id}/eliminar")
+    public ModelAndView eliminarTarea(@PathVariable("id") Long id) {
+        Long proyectoId = tareaService.eliminar(id);
+        return new ModelAndView("redirect:/proyectos/" + proyectoId + "/tareas");
+    }
+
+    @PostMapping("/tareas/{id}/actualizar")
+    public ModelAndView actualizarTarea(@PathVariable("id") Long id, @RequestParam String nombre, @RequestParam boolean completada) {
+        Tarea tareaExistente = tareaService.obtenerPorId(id);
+        tareaExistente.setNombre(nombre);
+        tareaExistente.setCompletada(completada);
+        tareaService.actualizar(tareaExistente);
+        return new ModelAndView("redirect:/proyectos/" + tareaExistente.getProyecto().getId() + "/tareas");
     }
 }

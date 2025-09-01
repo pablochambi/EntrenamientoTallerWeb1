@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Proyectos</title>
+</head>
+<body>
+    <h1>Proyectos</h1>
+    <ul>
+        <li th:each="proyecto : ${proyectos}">
+            <a th:href="@{/proyectos/{id}(id=${proyecto.id})}" th:text="${proyecto.nombre}"></a>
+        </li>
+    </ul>
+    <a href="/proyectos/nuevo">Nuevo Proyecto</a>
+</body>
+</html>

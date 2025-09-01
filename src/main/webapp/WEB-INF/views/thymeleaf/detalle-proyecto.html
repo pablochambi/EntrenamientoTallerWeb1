@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Proyecto</title>
+</head>
+<body>
+    <h1 th:text="${proyecto.nombre}"></h1>
+    <h2>Tareas</h2>
+    <ul>
+        <li th:each="tarea : ${proyecto.tareas}" th:text="${tarea.nombre}"></li>
+    </ul>
+    <h3>Agregar Tarea</h3>
+    <form th:action="@{/proyectos/{id}/tareas(id=${proyecto.id})}" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre">
+        <button type="submit">Agregar</button>
+    </form>
+</body>
+</html>
